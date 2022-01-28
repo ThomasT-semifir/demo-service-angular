@@ -1,0 +1,7 @@
+<div *ngFor="let user of userList">
+    {{user.id}}
+    {{user.name}}
+</div>
+
+<input type="text" [(ngModel)]="username">
+<button (click)="save()">save</button>

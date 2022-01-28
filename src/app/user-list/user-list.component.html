@@ -4,8 +4,5 @@
     {{user.mail}}
 </div>
 
-<form (submit)="save()" [formGroup]="user">
-    <input type="text" formControlName="name">
-    <input type="text" formControlName="email">
-    <button type="submit">save</button>
-</form>
+<app-new-user-form (newUser)="save($event)"></app-new-user-form>
+

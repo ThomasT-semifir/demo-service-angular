@@ -12,13 +12,8 @@ export class UserListComponent implements OnInit {
 
   userList: User[] = [];
 
-  user: FormGroup;
-
   constructor(private userService : UserService) { 
-    this.user = new FormGroup({
-      name: new FormControl(),
-      email: new FormControl()
-    })
+
   }
 
   ngOnInit(): void {
@@ -38,9 +33,9 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  save(): void {
-    let newUser = {...this.user.value}
-    this.userService.create(newUser).subscribe(() => this.getAll())
+  save(user: User): void {
+    console.log(user);
+    this.userService.create(user).subscribe(() => this.getAll())
   }
 
 }

@@ -1,6 +1,7 @@
 import { User } from './../models/user';
 import { UserService } from './../user.service';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-list',
@@ -10,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 export class UserListComponent implements OnInit {
 
   userList: User[] = [];
-  username: string = "";
 
-  constructor(private userService : UserService) { }
+  user: FormGroup;
+
+  constructor(private userService : UserService) { 
+    this.user = new FormGroup({
+      name: new FormControl(),
+      email: new FormControl()
+    })
+  }
 
   ngOnInit(): void {
     console.log("création");
@@ -32,7 +39,8 @@ export class UserListComponent implements OnInit {
   }
 
   save(): void {
-    this.userService.create({name: this.username}).subscribe(() => this.getAll())
+    let newUser = new User(this.user.get('name')!.value, this.user.get('email')!.value)
+    this.userService.create(newUser).subscribe(() => this.getAll())
   }
 
 }

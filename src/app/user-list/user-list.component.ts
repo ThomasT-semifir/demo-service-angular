@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit {
   }
 
   save(): void {
-    let newUser = new User(this.user.get('name')!.value, this.user.get('email')!.value)
+    let newUser = {...this.user.value}
     this.userService.create(newUser).subscribe(() => this.getAll())
   }
 
